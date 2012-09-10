@@ -140,9 +140,11 @@ class SalatPlugin(app: Application) extends Plugin {
   }
 
   override def onStop(){
-    sources.map { source =>
-      source._2.reset()
-    }
+	if (!Play.isTest) {
+	    sources.map { source =>
+	      source._2.reset()
+	    }
+	}
   }
 
   /**
