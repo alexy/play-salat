@@ -1,0 +1,18 @@
+diff -rupN -x '.*' -x target -x application.log ./src/main/scala/se/radley/plugin/salat/SalatPlugin.scala /s/w/scala/play/play-salat/src/main/scala/se/radley/plugin/salat/SalatPlugin.scala
+--- ./src/main/scala/se/radley/plugin/salat/SalatPlugin.scala	2012-09-10 14:18:35.000000000 -0700
++++ /s/w/scala/play/play-salat/src/main/scala/se/radley/plugin/salat/SalatPlugin.scala	2012-09-08 12:58:19.000000000 -0700
+@@ -140,9 +140,11 @@ class SalatPlugin(app: Application) exte
+   }
+ 
+   override def onStop(){
+-    sources.map { source =>
+-      source._2.reset()
+-    }
++	if (!Play.isTest) {
++	    sources.map { source =>
++	      source._2.reset()
++	    }
++	}
+   }
+ 
+   /**
